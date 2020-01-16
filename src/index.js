@@ -7,10 +7,16 @@ import api from './api';
 import shoppingList from './shopping-list';
 
 const main = function () {
-  api.getItems()
-  .then(res => res.json())
-  .then(res => console.log(res));
-  
+  api.createItem('pears')
+    .then(res => res.json())
+    .then((_newItem) => {
+      return api.getItems();
+    })
+    .then(res => res.json())
+    .then((items) => {
+      console.log(items);
+    });
+
   shoppingList.bindEventListeners();
   shoppingList.render();
 };
