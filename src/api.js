@@ -1,5 +1,5 @@
 
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com/lily-raina'
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/lily-raina';
 
 const getItems = function() {
   return fetch(`${BASE_URL}/items`);
@@ -17,7 +17,19 @@ const createItem = function(name) {
   });
 };
 
+const updateItem = function(id, updateData) {
+  const newData = JSON.stringify(updateData);
+  return fetch(`${BASE_URL}/items/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: newData
+  }); 
+};
+
 export default {
   getItems,
-  createItem
+  createItem,
+  updateItem
 };
