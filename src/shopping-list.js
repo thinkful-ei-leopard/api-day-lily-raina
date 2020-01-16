@@ -32,31 +32,31 @@ const generateShoppingItemsString = function (shoppingList) {
   return items.join('');
 };
 
-const generateError = function (message){
+const generateError = function (message) {
   return `
-    <section class="error-content">
-      <button id="cancel-error> X </button>
-      <p> ${message} </p>
-    </section>
-  `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
 };
 
 const renderError = function () {
   if (store.error) {
     const el = generateError(store.error);
     $('.error-container').html(el);
-  }
-  else{
+  } else {
     $('.error-container').empty();
   }
 };
 
+
 const handleCloseError = function () {
-  $('error-container').on('click','#cancel-error', () => {
-    store.handleError(null);
+  $('.error-container').on('click', '#cancel-error', () => {
+    store.setError(null);
     renderError();
   });
-}
+};
 
 const render = function () {
   renderError();
@@ -86,7 +86,6 @@ const handleNewItemSubmit = function () {
         render();
       })
       .catch((error) => {
-        console.log(error);
         store.handleError(error.message);
         renderError();
       });
@@ -103,7 +102,6 @@ const handleDeleteItemClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
     api.deleteItem(id)
-      .then(res => res.json())
       .then(() => {
         store.findAndDelete(id);
         render();
@@ -114,7 +112,7 @@ const handleDeleteItemClicked = function () {
         renderError();
       });
   });
-}
+};
 
 const handleEditShoppingItemSubmit = function () {
   $('.js-shopping-list').on('submit', '.js-edit-item', event => {
@@ -139,14 +137,14 @@ const handleItemCheckClicked = function () {
     const id = getItemIdFromElement(event.currentTarget);
     const item = store.findById(id);
     api.updateItem(id, {checked: !item.checked})
-    .then(() => { 
-      store.findAndUpdate(id, {checked: !item.checked});
-      render();
-    })
-    .catch((error) => {
-      store.handleError(error.message);
-      renderError();
-    });
+      .then(() => { 
+        store.findAndUpdate(id, {checked: !item.checked});
+        render();
+      })
+      .catch((error) => {
+        store.handleError(error.message);
+        renderError();
+      });
   });
 };
 

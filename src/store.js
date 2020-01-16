@@ -27,7 +27,7 @@ const toggleCheckedFilter = function () {
 
 const handleError = function (error) {
   this.error = error;
-}
+};
 
 export default {
   items,

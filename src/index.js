@@ -17,7 +17,7 @@ const main = function () {
   //     store.findAndUpdate(item.id, { name: 'barbaz' });
   //     console.log('new name: ' + item.name);
   //   });
-
+    });
   shoppingList.bindEventListeners();
   shoppingList.render();
 };

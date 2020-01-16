@@ -2,7 +2,7 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/lily-raina';
 
 const listApiFetch = function(...args) {
-  let error = false;
+  let error;
   return fetch(...args)
     .then(res => {
       if(!res.ok) {
@@ -20,8 +20,8 @@ const listApiFetch = function(...args) {
         return Promise.reject(error);
       }
       return data;
-    })
-}
+    });
+};
 
 const getItems = function() {
   return listApiFetch(`${BASE_URL}/items`);
@@ -53,7 +53,7 @@ const deleteItem = function(id){
   return listApiFetch(`${BASE_URL}/items/${id}`, {
     method: 'DELETE'
   });
-}
+};
 
 export default {
   getItems,
