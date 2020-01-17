@@ -50,7 +50,6 @@ const renderError = function () {
   }
 };
 
-
 const handleCloseError = function () {
   $('.error-container').on('click', '#cancel-error', () => {
     store.setError(null);
@@ -80,7 +79,7 @@ const handleNewItemSubmit = function () {
     $('.js-shopping-list-entry').val('');
 
     api.createItem(newItemName)
-      .then(res => res.json())
+      // .then(res => res.json())
       .then((newItem) => {
         store.addItem(newItem);
         render();
